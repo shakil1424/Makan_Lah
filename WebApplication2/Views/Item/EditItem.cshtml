@@ -1,0 +1,58 @@
+﻿@page
+
+@{
+}
+<div class="text-info">
+    <h3>Edit Item </h3>
+</div>
+
+
+<div class="row">
+    <div class="col-lg-6 col-md-5 col-sm-12 col-xs-12">
+        <form asp-action="EditItem" asp-controller="Item" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="All"></div>
+
+            <input type="hidden" name="itemId" value="@ViewBag.itemId" />
+
+            <div class="form-group">
+                <label>Enter Item Title</label>
+                <input type="text" name="itemTitle" class="form-control" required />
+
+            </div>
+
+            <div class="form-group">
+                <label>Enter Item Description</label>
+                <textarea name="itemDescription" class="form-control" maxlength="200" required></textarea>
+
+            </div>
+
+            <div class="form-group">
+                <label>Enter Item Price</label>
+                <input type="number" name="itemPrice" class="form-control" step="0.01" required />
+
+            </div>
+            <div class="form-group">
+                <label>Enter Item Discount</label>
+                <input type="number" name="itemDiscount" class="form-control" required />
+
+            </div>
+
+            <div class="form-group">
+                <label>Upload Image</label>
+                <input type="file" name="file" class="form-control" required />
+
+            </div>
+
+
+
+            <div class="text-right">
+                <button type="submit" name="editItem" class="btn btn-default">SAVE</button>
+            </div>
+
+
+        </form>
+
+
+    </div>
+
+</div>

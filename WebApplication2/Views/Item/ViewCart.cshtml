@@ -1,0 +1,84 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<span style="margin-left: 20px; color:red;">@TempData["message"]</span>
+<div class="row">
+    @if ((ViewBag.orderList as List<Item>).Count == 0)
+    {
+        <h2 style="color:brown">No Item in the cart</h2>
+    }
+    else
+    {
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Item</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Remove</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if ((ViewBag.orderList as List<Item>).Count > 0)
+                {
+                    int no = 0;
+                    float total = 0;
+                    foreach (var item in (ViewBag.orderList as List<Item>))
+                    {
+                        <tr>
+                            <th scope="row">@(++no)</th>
+                            <td>@item.Title</td>
+                            <td>@(item.Price - item.Discount)</td>
+                            <td><a class="btn btn-danger btn-sm" asp-action="RemoveFromCart" asp-controller="Item" asp-route-id="@(no-1)">Remove</a></td>
+
+
+                        </tr>
+                        total = total + (item.Price - item.Discount);
+
+                    }
+                    <tr>
+                        <th scope="row"></th>
+                        <td></td>
+                        <td>Total:@total</td>
+                        <td></td>
+
+                    </tr>
+
+                }
+
+
+
+
+
+            </tbody>
+        </table>
+    }
+
+
+    <hr />
+</div>
+
+<div class="row ">
+    <div class="col-lg-4"></div>
+    <div class="col-lg-4" >
+        <div class="pull-left">
+            <a asp-controller="Restaurant" asp-action="Index" class="btn btn-success">Add More Item</a>
+            @if ((ViewBag.orderList as List<Item>).Count > 0)
+             {
+                 
+                 <a asp-controller="Order" asp-action="CheckOut" class="btn btn-info" asp-route-id="">Check out</a>
+             }
+
+
+        </div>
+        
+
+    </div>
+    <div class="col-lg-4"></div>
+    
+
+
+
+</div>

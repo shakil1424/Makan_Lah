@@ -1,0 +1,92 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <img src="~/images/image_1.jpg" alt="ASP.NET" class="img-responsive" />
+            <div class="carousel-caption" role="option">
+                <p style="font-weight:600">
+                    Enjoy the best of Chinese cuisine.<br>
+                    <a class="btn btn-default" asp-controller="Restaurant" asp-action="Index">
+                        Learn More
+                    </a>
+                </p>
+            </div>
+        </div>
+        <div class="item">
+            <img src="~/images/image_2.jpg" alt="Visual Studio" class="img-responsive" />
+            <div class="carousel-caption" role="option">
+                <p style="font-weight:600">
+                    Enjoy the best of Arabic cuisine.<br>
+                    <a class="btn btn-default" asp-controller="Restaurant" asp-action="Index">
+                        Learn More
+                    </a>
+                </p>
+            </div>
+        </div>
+        <div class="item">
+            <img src="~/images/image_3.jpg" alt="Microsoft Azure" class="img-responsive" />
+            <div class="carousel-caption" role="option">
+                <p style="font-weight:600">
+                    Enjoy the best of Indian cuisine.<br>
+                    <a class="btn btn-default" asp-controller="Restaurant" asp-action="Index">
+                        Learn More
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+
+<div class="row" style="font-family:'Comic Sans MS'">
+    <div class="col-lg-5">
+        <h2>Makan-Lah</h2>
+        <p style="font-size:18px">
+            <span style="color:red; font-weight:bolder">Makan-lah </span>food court is established to provide
+            quality meals for the students at reasonable price. There are more than 10 different
+            types of food stall. They serves all kind of food from eastern to western belong to chinese,
+            indian, malay, arabic and african cuisine.
+        </p>
+        <p style="font-size:18px">
+            Each stall serves several items based on their availablity of product and customer preference.
+            The menu is changed keeping the customers' test in mind. The quality is maintained very strictly
+            as well as trying to keep the price reasonable. The restaurant opens fully around 10:00 am in the morning
+            and serves students as long as they have food in stock.
+        </p>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+    <div class="col-lg-5">
+        <h2>Limkokwing University</h2>
+        <p  style="font-size:18px">
+            <span style=" font-weight:bold">Limkokwing University of Creative Technology</span> (also referred to as Limkokwing) is a private international
+            university with a presence across Africa, Europe, and Asia. With its main campus in Malaysia,
+            the university has over 30,000 students from more than 150 countries,
+            studying in campuses in Kuala Lumpur, Melaka, Kuching, Botswana, Cambodia,
+            Cambodia, Lesotho, Sierra Leone, Eswatini, Uganda and the United Kingdom.
+            It is considered to be one of the top arts and design schools in Asia,
+            and is ranked highly among Asian universities in the QS Rankings.
+        </p>
+        <a class="btn btn-info" href="https://www.limkokwing.net/malaysia/">
+            Learn More
+        </a>
+    </div>
+
+
+</div>

@@ -1,0 +1,190 @@
+﻿
+@model IEnumerable<WebApplication2.Models.Restaurant>
+@{
+}
+
+@if (Model.Count() == 0)
+{
+    <h1>Add New Restaurant</h1>
+
+}
+
+else
+{
+    @foreach (Restaurant restaurant in Model)
+    {
+        <div class="row">
+            <div class="col-lg-6">
+                <h2>@restaurant.Title</h2>
+
+            </div>
+            <div class="col-lg-6 text-right">
+
+
+                <form asp-controller="Restaurant" asp-action="DeleteRestaurant" method="post">
+                    @if (ViewBag.User != null && (ViewBag.User as AppUser).RoleId == 2 && (ViewBag.User as AppUser).UserId == restaurant.userId)
+                    {
+                        <a asp-action="ViewRestaurantOrder" asp-controller="Order" asp-route-id=" @restaurant.Id" class="btn btn-info">View Order</a>
+                        <a asp-action="EditRestaurant" asp-controller="Restaurant" asp-route-id=" @restaurant.Id" class="btn btn-info ">Edit</a>
+                        <a asp-action="AddItem" asp-controller="Item" asp-route-id=" @restaurant.Id" class="btn btn-success">Add Item</a>
+
+
+                    }
+
+
+                    <input type="hidden" name="restaurantId" value="@restaurant.Id" />
+                    @if (ViewBag.User != null && (ViewBag.User as AppUser).RoleId == 1)
+                    {
+                        <button type="submit" class="btn btn-danger ">Delete</button>
+
+                    }
+
+                </form>
+
+
+            </div>
+            <img src="@Url.Content(restaurant.Url)" alt="Restaurant" class="img-responsive" />
+
+
+        </div>
+        <div class="row">
+
+            @if (restaurant.Items.Count() == 0)
+            {
+                <div><h1>No Item Is Available</h1></div>
+
+            }
+
+
+            else
+            {
+                @foreach (Item item in restaurant.Items)
+                {
+                    <div class="col-lg-3 thumbnail ">
+
+
+                        <img src="@Url.Content(item.Url)" alt="Mandi Chicken" class="img-responsive" />
+
+                        <div class="caption">
+                            <h3>@item.Title</h3>
+                            <p class="Description">
+                                @item.Description
+                            </p>
+                            <p style="font-weight:bold;color:darkcyan ">Price: RM @(item.Price - item.Discount)</p>
+                            <p>
+                                <span style="font-weight:bold">Selling Status: @(item.IsAvailable == 1 ? "Available" : "Not Available")</span>
+                                @if (ViewBag.User != null && (ViewBag.User as AppUser).RoleId == 2 && (ViewBag.User as AppUser).UserId == restaurant.userId)
+                                {
+                                    @if (item.IsAvailable == 1)
+                                    {
+                                        <a class="btn btn-danger btn-sm " asp-action="ToggleAvailability" asp-controller="Item" asp-route-id="@item.Id">Unavailable</a>
+                                    }
+                                    else
+                                    {
+                                        <a class="btn btn-primary btn-sm" asp-action="ToggleAvailability" asp-controller="Item" asp-route-id="@item.Id">Available</a>
+                                    }
+
+                                }
+
+                            </p>
+
+                            <div>
+                                <div col-lg-6>
+
+
+
+                                    @if (item.Discount != 0)
+                                    {
+                                    <span style="color:red ; font-weight:bolder">Get @item.Discount RM DISCOUNT</span>
+                                    }
+
+                                    @if (ViewBag.User != null && (ViewBag.User as AppUser).RoleId == 2 && (ViewBag.User as AppUser).UserId == restaurant.userId)
+                                    {
+
+
+
+                                        <a class="btn btn-success" data-toggle="modal" data-target="#@("modal"+item.Id)">Add Discount</a>
+                                        <div class="modal fade" id="@("modal"+item.Id)" role="dialog">
+                                            <div class="modal-dialog modal-sm">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                        <h4 class="modal-title">Add Discount</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form asp-controller="Item" asp-action="AddDiscount" method="post">
+                                                            <input type="hidden" name="itemId" value="@item.Id" />
+                                                            <div class="form-group">
+                                                                <label>Enter Item Discount</label>
+                                                                <input type="number" name="itemDiscount" class="form-control" step="0.01" required />
+
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="submit" name="addDiscount" class="btn btn-success">Add Discount</button>
+                                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                                            </div>
+
+                                                        </form>
+
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    }
+                                </div>
+
+                                <div col-lg-6>
+
+
+
+                                    <form asp-controller="Item" asp-action="DeleteItem" method="post">
+                                        <input type="hidden" name="itemId" value="@item.Id" />
+                                        @if (ViewBag.User != null && (ViewBag.User as AppUser).RoleId == 2 && (ViewBag.User as AppUser).UserId == restaurant.userId)
+                                        {
+
+                                            @*<a class="btn btn-success" data-toggle="modal" data-target="#myModal">Add Discount</a>*@
+                                            <a asp-action="EditItem" asp-controller="Item" asp-route-id="@item.Id" class="btn btn-info ">Edit</a>
+                                            <button type="submit" class="btn btn-danger ">Delete</button>
+
+                                        }
+
+                                        @if (ViewBag.User != null && (ViewBag.User as AppUser).RoleId == 3 && item.IsAvailable == 1)
+                                        {
+                                            <a class="btn btn-success " asp-action="AddToCart" asp-controller="Item" asp-route-id="@item.Id">Add to cart</a>
+
+                                        }
+
+                                    </form>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                    
+
+                }
+
+            }
+
+
+
+
+        </div>
+        <div class="row">
+            <hr />
+        </div>
+
+    }
+
+}
+
+
+
+

@@ -1,0 +1,25 @@
+﻿
+@model IEnumerable<WebApplication2.Models.AppUser>
+@{
+}
+
+<table>
+    <thead>
+        <td>User ID</td>
+        <td>PASSWORD</td>
+        <td>DESCRIPTION</td>
+    </thead>
+    <tbody>
+       @{ 
+           foreach (var item in Model)
+           {
+               <tr>
+                   <td>@item.UserId</td>
+                   <td>@item.Password</td>
+                   <td>@item.RoleId</td>
+               </tr>
+
+           }
+       }
+    </tbody>
+</table>

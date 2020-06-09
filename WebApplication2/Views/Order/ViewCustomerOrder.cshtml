@@ -1,0 +1,70 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model IEnumerable<WebApplication2.Models.Order>
+
+<div class="row">
+    @if (Model.Count() == 0)
+    {
+        <h2 style="color:brown">No Order is available</h2>
+    }
+    else
+    {
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Restaurant</th>
+                    <th scope="col">TotalPrice</th>
+                    
+                    <th scope="col">Status</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Count() > 0)
+                {
+
+                    foreach (var order in Model)
+                    {
+                        <tr>
+                            <th scope="row">@order.Id</th>
+                            <td>@order.Date</td>
+                            <td>@order.Description</td>
+                            <td>@order.restaurantTitle</td>
+                            <td>@order.TotalPrice</td>
+                            <td>
+                                @if (order.OrderStatus == 1)
+                                {
+                                    <span style="font-weight:bolder; color:forestgreen">Delivered</span>
+                                }
+                                else
+                                {
+                                    <span style="font-weight:bolder; color:coral">Not Delivered</span>
+                                }
+                            </td>
+
+
+                        </tr>
+
+
+                    }
+
+
+                }
+
+
+
+
+
+            </tbody>
+        </table>
+    }
+
+
+
+</div>
